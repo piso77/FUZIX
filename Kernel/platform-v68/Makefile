@@ -1,6 +1,6 @@
 
 CSRCS = devtty.c
-CSRCS += devices.c main.c libc.c
+CSRCS += devices.c main.c
 
 ASRCS = p68000.S crt0.S
 ASRCS += tricks.S
@@ -8,7 +8,7 @@ ASRCS += tricks.S
 DSRCS = ../dev/devide.c ../dev/mbr.c ../dev/blkdev.c ../dev/devide_discard.c
 DOBJS = $(patsubst ../dev/%.c,%.o, $(DSRCS))
 
-LSRCS = ../lib/68000exception.c
+LSRCS = ../lib/68000exception.c ../lib/libc-68000.c
 LOBJS = $(patsubst ../lib/%.c,%.o, $(LSRCS))
 
 COBJS = $(CSRCS:.c=$(BINEXT))
@@ -44,6 +44,6 @@ image:
 	../devio.o ../filesys.o ../process.o ../inode.o ../syscall_fs.o \
 	../syscall_proc.o ../syscall_other.o ../mm.o ../swap.o \
 	../tty.o ../devsys.o ../usermem.o ../syscall_fs2.o 68000exception.o \
-	../syscall_fs3.o ../syscall_exec32.o blkdev.o devide.o devide_discard.o mbr.o  \
-	../usermem_std-68000.o devtty.o libc.o ../malloc.o > ../fuzix.map
+	../syscall_fs3.o ../syscall_exec32.o blkdev.o devide.o devide_discard.o mbr.o \
+	../usermem_std-68000.o devtty.o libc-68000.o ../malloc.o > ../fuzix.map
 	$(CROSS_COMPILE)objcopy fuzix.elf -O binary ../fuzix.bin

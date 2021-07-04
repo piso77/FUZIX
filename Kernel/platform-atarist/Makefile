@@ -1,14 +1,14 @@
 CROSS_CCOPTS += $(DEP_CFLAGS)
 
 CSRCS = devlpr.c devtty.c dma.c devfd.c devacsi.c
-CSRCS += devices.c main.c libc.c
+CSRCS += devices.c main.c
 
 ASRCS = p68000.S crt0.S
 ASRCS += loader.S
 ASRCS += tricks.S
 ASRCS += cartridge.S
 
-LSRCS = ../lib/68000exception.c
+LSRCS = ../lib/68000exception.c ../lib/libc-68000.c
 LOBJS = $(patsubst ../lib/%.c,%.o, $(LSRCS))
 
 DSRCS = ../dev/mbr.c ../dev/blkdev.c ../dev/devide.c ../dev/devide_discard.c
@@ -53,7 +53,7 @@ FOBJS = crt0.o \
 	../syscall_proc.o ../syscall_other.o ../mm.o ../swap.o ../flat.o \
 	../tty.o ../devsys.o ../usermem.o ../syscall_fs2.o \
 	../syscall_fs3.o ../syscall_exec32.o \
-	../usermem_std-68000.o devlpr.o devtty.o libc.o ../vt.o ../malloc.o \
+	../usermem_std-68000.o devlpr.o devtty.o libc-68000.o ../vt.o ../malloc.o \
 	blkdev.o mbr.o devide.o devide_discard.o devacsi.o dma.o \
 	../font8x8.o
 

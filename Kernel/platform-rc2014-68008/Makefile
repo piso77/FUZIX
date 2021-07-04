@@ -1,6 +1,6 @@
 
 CSRCS = devtty.c devinput.c devgpio.c
-CSRCS += devices.c main.c libc.c ppide.c tms9918.c 
+CSRCS += devices.c main.c ppide.c tms9918.c 
 
 ASRCS = p68000.S crt0.S
 ASRCS += tricks.S spi.S ds1302io.S
@@ -11,7 +11,7 @@ DSRCS += ../dev/ds1302.c ../dev/ds1302_discard.c
 DSRCS += ../dev/ps2bitbang.c ../dev/ps2bitbang_rc2014.c ../dev/ps2kbd.c
 DOBJS = $(patsubst ../dev/%.c,%.o, $(DSRCS))
 
-LSRCS = ../lib/68000exception.c
+LSRCS = ../lib/68000exception.c ../lib/libc-68000.c
 LOBJS = $(patsubst ../lib/%.c,%.o, $(LSRCS))
 
 RSRCS = ../dev/rc2014/zxkey.c ../dev/rc2014/zxkeyboard.c
@@ -54,7 +54,7 @@ image:
 	../tty.o ../vt.o ../devsys.o ../usermem.o ../syscall_fs2.o \
 	../syscall_fs3.o ../syscall_exec32.o ../font6x8.o \
 	blkdev.o devide.o devide_discard.o mbr.o zxkey.o zxkeyboard.o \
-	../usermem_std-68000.o devtty.o libc.o ../malloc.o ppide.o \
+	../usermem_std-68000.o devtty.o libc-68000.o ../malloc.o ppide.o \
 	devsd.o devsd_discard.o spi.o ds1302.o ds1302_discard.o ds1302io.o \
 	devinput.o ../devinput.o devgpio.o tms9918.o \
 	ps2kbd.o ps2bitbang.o ps2bitbang_rc2014.o \
